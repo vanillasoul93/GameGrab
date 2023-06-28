@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ak-47.png" />
+    <None Remove="Assets\ak-47.png" />
+    <None Remove="Assets\board-game.png" />
+    <None Remove="Assets\board-items.png" />
+    <None Remove="Assets\chess-piece.png" />
+    <None Remove="Assets\chess-pieces.png" />
+    <None Remove="Assets\dice.png" />
+    <None Remove="Assets\game-controller.png" />
+    <None Remove="Assets\ghost.png" />
+    <None Remove="Assets\gun.png" />
+    <None Remove="Assets\joystick.png" />
+    <None Remove="Assets\lan.png" />
+    <None Remove="Assets\multiplayer.png" />
+    <None Remove="Assets\pentesting.png" />
+    <None Remove="Assets\people.png" />
+    <None Remove="Assets\pumpkin.png" />
+    <None Remove="Assets\settings.png" />
+    <None Remove="Assets\sharing.png" />
+    <None Remove="Assets\SplashScreen.png" />
+    <None Remove="Assets\steering-wheel.png" />
+    <None Remove="Assets\target.png" />
+    <None Remove="Assets\team.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Playlists\" />
+    <Folder Include="Profiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ak-47.png" />
+    <Resource Include="Assets\ak-47.png" />
+    <Resource Include="Assets\board-game.png" />
+    <Resource Include="Assets\board-items.png" />
+    <Resource Include="Assets\chess-piece.png" />
+    <Resource Include="Assets\chess-pieces.png" />
+    <Resource Include="Assets\dice.png" />
+    <Resource Include="Assets\game-controller.png" />
+    <Resource Include="Assets\ghost.png" />
+    <Resource Include="Assets\gun.png" />
+    <Resource Include="Assets\joystick.png" />
+    <Resource Include="Assets\lan.png" />
+    <Resource Include="Assets\multiplayer.png" />
+    <Resource Include="Assets\pentesting.png" />
+    <Resource Include="Assets\people.png" />
+    <Resource Include="Assets\pumpkin.png" />
+    <Resource Include="Assets\settings.png" />
+    <Resource Include="Assets\sharing.png" />
+    <Resource Include="Assets\steering-wheel.png" />
+    <Resource Include="Assets\target.png" />
+    <Resource Include="Assets\team.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="Assets\SplashScreen.png" />
+  </ItemGroup>
+
+</Project>

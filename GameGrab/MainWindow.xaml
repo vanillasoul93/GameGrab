@@ -1,0 +1,313 @@
+﻿<Window x:Class="GameGrab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameGrab"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="GameGrab" Height="700" Width="900"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <!--Main Grid-->
+    <Grid x:Name="MainGrid" Background="#1f2837">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="1" Grid.ColumnSpan="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Vertical">
+                <Button x:Name="ButtonGameGrab" Style="{DynamicResource ButtonStyleSteam}"  Height="50" Content="Game Grab" FontSize="15"  Foreground="#569dfb"  Click="ButtonGameGrab_Click"></Button>
+                <Button x:Name="ButtonCoinFlip" Style="{DynamicResource ButtonStyleSteam}"  Height="50" Content="Coin Flip" FontSize="15"  Foreground="#569dfb"  Click="ButtonCoinFlip_Click"></Button>
+                <Button x:Name="ButtonGameVault" Style="{DynamicResource ButtonStyleSteam}"  Height="50" Content="Game Vault" FontSize="15"  Foreground="#569dfb"  Click="ButtonGameVault_Click"></Button>
+                <Button x:Name="ButtonPlaylists" Style="{DynamicResource ButtonStyleSteam}"  Height="50" Content="Playlists" FontSize="15"  Foreground="#569dfb"  Click="ButtonPlaylists_Click"></Button>
+            </StackPanel>
+            <Grid Grid.Row="1" Background="#66000000"></Grid>
+            <StackPanel Grid.Row="2" Orientation="Vertical">
+                <Button x:Name="ButtonSettings" Style="{DynamicResource ButtonStyleSteam}"  Height="50" Content="Settings" FontSize="15" Foreground="#569dfb" Click="ButtonSettings_Click"></Button>
+                <Button x:Name="ButtonExit" Style="{DynamicResource ButtonStyleSteam}"  Height="50" Content="Exit" FontSize="15" Foreground="#569dfb" Click="ButtonExit_Click"></Button>
+            </StackPanel>
+
+        </Grid>
+        <!--Game Grab Panel-->
+        <Grid x:Name="GridGameGrab" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Margin="0" Background="#191d25">
+
+        </Grid>
+        <!--Game Vault Panel-->
+        <Grid x:Name="GridGameVault" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Background="#191d25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="TextBoxSearchSteamGames" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="10,20,0,0" VerticalContentAlignment="Center" FontSize="20" Background="#33000000" Foreground="#fcfdfe" BorderThickness="0" TextChanged="TextBoxSearchSteamGames_TextChanged"></TextBox>
+            <Button Style="{DynamicResource ButtonStyleSteam}"  x:Name="ButtonSearchSteamGames" Grid.Row="1" Grid.Column="3" Margin="0,20,10,0" Foreground="#569dfb" Click="ButtonSearchSteamGames_Click">🔍</Button>
+            <TextBox x:Name="TextBoxSearchVaultGames" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3" Margin="10,20,0,0" VerticalContentAlignment="Center" FontSize="20" Background="#33000000" Foreground="#fcfdfe" BorderThickness="0"></TextBox>
+            <Button Style="{DynamicResource ButtonStyleSteam}"  x:Name="ButtonSearchVaultGames" Grid.Row="1" Grid.Column="8" Margin="0,20,10,0" Foreground="#569dfb" Click="ButtonSearchVaultGames_Click">🔍</Button>
+            <Label Content="Steam Games" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="24" Margin="10,0,0,0" Padding="0" Foreground="#fcfdfe"></Label>
+
+            <ListView x:Name="ListViewSteamGames" Foreground="White" FontSize="12" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="9" Margin="10,0,10,10" Background="#131821" SelectionChanged="ListViewSteamGames_SelectionChanged" BorderThickness="0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Foreground="#FFA2BADE" FontSize="15" Text="{Binding name}"></TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBlock x:Name="TextBlockSteamImportGameCount" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="4" Foreground="#FFA2BADE" FontSize="17" Text="0 Games" HorizontalAlignment="Center"></TextBlock>
+
+            <Label Content="Game Vault" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="4" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="24" Margin="10,0,0,0" Padding="0" Foreground="#fcfdfe"></Label>
+
+            <ListView x:Name="ListViewVaultGames" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="4" Grid.RowSpan="9" Margin="10,0,10,10" Background="#131821" Foreground="White" BorderThickness="0" SelectionChanged="ListViewVaultGames_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Foreground="#FFA2BADE" FontSize="15" Text="{Binding Name}"></TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBlock x:Name="TextBlockVaultGamesCount" Grid.Column="5" Grid.Row="11" Grid.ColumnSpan="4" Foreground="#FFA2BADE" FontSize="17" Text="0 Games" HorizontalAlignment="Center"></TextBlock>
+
+
+            <Button Style="{DynamicResource ButtonStyleSteam}"  Grid.Row="5" Grid.Column="4" x:Name="ButtonAddToGameVault" FontSize="40" Margin="10" Padding="0,-13,0,0"  Foreground="#569dfb">&#x2192;</Button>
+            <Button Style="{DynamicResource ButtonStyleSteam}"  Grid.Row="6" Grid.Column="4" x:Name="ButtonRemoveFromGameVault" FontSize="40" Margin="10" Padding="0,-13,0,0"  Foreground="#569dfb">&#x2190;</Button>
+
+
+        </Grid>
+        <!-- Coin Flip Panel-->
+        <Grid x:Name="GridCoinFlip" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Background="#191d25" Visibility="Hidden">
+
+        </Grid>
+        <!--Playlist Panel-->
+        <Grid x:Name="GridPlaylists" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Background="#191d25" Visibility="Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="ButtonAddPlaylist" Grid.Row="0" Style="{DynamicResource ButtonStyleSteam}"  Height="50" Content="&#x271A; Playlist" FontSize="20" Width="200" HorizontalAlignment="Left" Foreground="#569dfb" Margin="5,5,0,5" Click="ButtonAddPlaylist_Click"></Button>
+
+
+                <ListView x:Name="ListViewPlaylists" Grid.Row="1" Background="#191d25"  BorderThickness="0" BorderBrush="Transparent" HorizontalContentAlignment="Stretch">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Background="#33000000" Height="180" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Grid Grid.Column="0" Grid.ColumnSpan="1" Background="#33000000">
+                                    <Ellipse  Margin="5" Width="150" Height="150">
+                                        <Ellipse.Fill>
+                                            <LinearGradientBrush StartPoint="1,1" EndPoint="1,0">
+                                                <GradientStop Color="#373f50" Offset="1"/>
+                                                <GradientStop Color="#191d25" Offset="0"/>
+                                            </LinearGradientBrush>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <Rectangle  Margin="5" Width="100" Height="100">
+                                        <Rectangle.Fill>
+                                            <LinearGradientBrush StartPoint="1,1" EndPoint="1,0">
+                                                <GradientStop Color="#569dfb" Offset="1"/>
+                                                <GradientStop Color="#569dfb" Offset="0"/>
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                        <Rectangle.OpacityMask>
+                                            <ImageBrush ImageSource="/Assets/target.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                    
+                                </Grid>
+                                <Grid Grid.Column="1" Grid.ColumnSpan="3" Background="#33000000">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="2*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock x:Name="TextBlockPlaylistTitle"  Grid.Row="0" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="#569dfb" Margin="5"/>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <UniformGrid Grid.Column="0">
+                                            <Image  x:Name="ImagePlaylistGame1" Source="{Binding tempImage1}" Margin="5" Stretch="Uniform"/>
+                                        </UniformGrid>
+                                        <UniformGrid Grid.Column="1">
+                                            <Image  x:Name="ImagePlaylistGame2" Source="{Binding tempImage2}" Margin="5" Stretch="Uniform"/>
+                                        </UniformGrid>
+                                        <UniformGrid Grid.Column="2">
+                                            <Image  x:Name="ImagePlaylistGame3" Source="{Binding tempImage3}" Margin="5" Stretch="Uniform"/>
+                                        </UniformGrid>
+                                        <UniformGrid Grid.Column="3">
+                                            <Image  x:Name="ImagePlaylistGame4" Source="{Binding tempImage4}" Margin="5" Stretch="Uniform"/>
+                                        </UniformGrid>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button x:Name="ButtonEditPlaylist" Grid.Column="0" Style="{DynamicResource ButtonStyleSteam}"   Content="View/Edit" FontSize="15" Margin="5" Foreground="#569dfb"></Button>
+                                        <Button x:Name="ButtonDeletePlaylist" Grid.Column="1" Style="{DynamicResource ButtonStyleSteam}"   Content="Delete" FontSize="15"  Margin="5" Foreground="#d63e3e"></Button>
+                                    </Grid>
+
+                                </Grid>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ScrollViewer Style="{DynamicResource FavsScrollViewer}">
+
+                    </ScrollViewer>
+                </ListView>
+
+
+
+
+            </Grid>
+
+
+        </Grid>
+
+        <!--Settings Panel-->
+        <Grid x:Name="GridSettings" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Background="#191d25" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="11" Grid.ColumnSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Content="SteamID" Foreground="#fcfdfe"></Label>
+                <TextBox x:Name="TextBoxSteamID" Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="5" Margin="5,10,0,10" VerticalContentAlignment="Center" FontSize="20" Background="#33000000" Foreground="#fcfdfe" BorderThickness="0"></TextBox>
+                <Button Style="{DynamicResource ButtonStyleSteam}" x:Name="ButtonImportFromSteam" Grid.Row="11" Grid.Column="6" Grid.ColumnSpan="3" Margin="10" Content="Import User" FontSize="15" Foreground="#569dfb" Width="150" Click="ButtonImportFromSteam_Click"></Button>
+            </Grid>
+            <Grid x:Name="GridUserDetails"  Grid.Row="2" Grid.RowSpan="8" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="9"  Background="#33000000"></Grid>
+                <UniformGrid Grid.Row="0" Grid.Column="1" Grid.RowSpan="4" HorizontalAlignment="Center" VerticalAlignment="Stretch" Margin="15">
+                    <Image x:Name="ImageImportProfilePicture" Stretch="Uniform"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                </UniformGrid>
+                <Grid Grid.Row="3" Grid.Column="1" Grid.RowSpan="7">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+
+                    <TextBlock x:Name="TextBlockImportProfileUsername" Grid.Row="1" Text="VanillaSoul" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="35" Foreground="#569dfb" Margin="0"/>
+                    <TextBlock x:Name="TextBlockImportProfileSteamId" Grid.Row="2" Text="124642728" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Foreground="#569dfb" Margin="0"/>
+                    <Button Style="{DynamicResource ButtonStyleSteam}" x:Name="ButtonImportGamesFromProfile"  Grid.Row="3" Margin="5"  Content="Import Game Library" FontSize="15"  Width="250"  VerticalAlignment="Stretch"  Foreground="#569dfb" Click="ButtonImportGamesFromProfile_Click" ></Button>
+                    <Button Style="{DynamicResource ButtonStyleSteam}" x:Name="ButtonImportProfileOpenProfileUrl"  Grid.Row="4" Margin="5"  Content="View Profile Url" FontSize="15"  Width="250"  VerticalAlignment="Stretch"  Foreground="#569dfb" ></Button>
+                </Grid>
+
+            </Grid>
+        </Grid>
+        <!--Import Steam ID Panel-->
+        <Grid x:Name="GridImportSteamId" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Background="#191d25" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label x:Name="labelImportTitle" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Importing Steam Games" Foreground="#fcfdfe" FontSize="25"></Label>
+                <Label x:Name="labelImportSteamId" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="SteamID:" Foreground="#fcfdfe" FontSize="15"></Label>
+
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label x:Name="LabelProgressGameName" HorizontalAlignment="Center" VerticalAlignment="bottom" Grid.Row="0" Content="" Foreground="#fcfdfe" FontSize="30"/>
+                <ProgressBar x:Name="ProgressBarImport" Grid.Row="1" Height="50" Margin="10,0"
+                         Background="#66000000" Foreground="#569dfb">
+                </ProgressBar>
+                <Label x:Name="LabelProgressCount" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2" Content="" Foreground="#fcfdfe" FontSize="30"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" TextWrapping="Wrap" Padding="20" FontSize="15" Foreground="White" Text="Depending on how many games you have, this process can take a while. To not be rate limited by the Steam API, requests for each game have been slowed to 1500ms. Expect an  average of 1.7 seconds per game."></TextBlock>
+                <Button x:Name="ButtonCancelImportSteamId"  Grid.Row="1" Margin="10" Content="Stop" FontSize="15" Background="#66000000" Width="250" Height="50" VerticalAlignment="Bottom"  Foreground="#569dfb" BorderBrush="Transparent" BorderThickness="0" Click="ButtonCancelImportSteamId_Click"></Button>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</Window>
