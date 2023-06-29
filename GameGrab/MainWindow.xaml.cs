@@ -463,6 +463,8 @@ namespace GameGrab
         private void Import_Steam_Games_Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Console.WriteLine("Finished importing all steam games from API");
+            Console.WriteLine("Sorting Steam List Alphabetically");
+            
             //TextBoxSearchSteamGames.IsEnabled = true;
             //ButtonSearchSteamGames.IsEnabled = true;
         }
